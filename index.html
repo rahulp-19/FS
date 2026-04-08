@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shrudhu Ji 💖</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+
+    body {
+      background: radial-gradient(circle at top, #111, #000);
+      color: white;
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .container {
+      text-align:center;
+      padding:20px;
+      z-index:2;
+      max-width:90%;
+    }
+
+    h1 {
+      font-size:clamp(1.8rem, 5vw, 2.5rem);
+      margin-bottom:10px;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size:clamp(1rem, 3vw, 1.2rem);
+      margin:10px 0;
+      opacity:0;
+      animation: fadeUp 1s forwards;
+    }
+
+    .lotus {
+      font-size:70px;
+      margin:20px 0;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    button {
+      margin-top:20px;
+      padding:12px 25px;
+      border:none;
+      border-radius:25px;
+      background:white;
+      color:black;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover {
+      background:#ff69b4;
+      color:white;
+      transform:scale(1.1);
+    }
+
+    .hidden {
+      margin-top:20px;
+      font-size:1.3rem;
+      color:#ff69b4;
+      opacity:0;
+      transition:1s;
+    }
+
+    .show {
+      opacity:1;
+    }
+
+    canvas {
+      position:absolute;
+      top:0;
+      left:0;
+      z-index:1;
+    }
+
+    @keyframes float {
+      0%,100% { transform:translateY(0);} 
+      50% { transform:translateY(-15px);} 
+    }
+
+    @keyframes fadeUp {
+      from {opacity:0; transform:translateY(20px);} 
+      to {opacity:1; transform:translateY(0);} 
+    }
+
+    @keyframes glow {
+      from { text-shadow:0 0 10px #ff69b4; }
+      to { text-shadow:0 0 25px #ff1493; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="lotusCanvas"></canvas>
+
+<div class="container">
+  <h1>Hey Shrudhu Ji 🖤🪷</h1>
+  <div class="lotus">🪷</div>
+
+  <p style="animation-delay:1s;">From your Ruhu Ji 💫</p>
+  <p style="animation-delay:2s;">You are not just my bestie...</p>
+  <p style="animation-delay:3s;">You are my comfort, my peace, my happiness 🖤</p>
+  <p style="animation-delay:4s;">Life feels magical with you ✨</p>
+
+  <button onclick="reveal()">Tap Me 💌</button>
+
+  <div id="msg" class="hidden">
+    Forever my favorite person, Shrudhu Ji 🖤🪷
+  </div>
+</div>
+
+<script>
+  function reveal(){
+    document.getElementById('msg').classList.add('show');
+  }
+
+  // LOTUS RAIN 🌸
+  const canvas = document.getElementById('lotusCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let lotuses = [];
+
+  function createLotus(){
+    lotuses.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*-canvas.height,
+      size: Math.random()*20 + 20,
+      speed: Math.random()*1 + 0.5
+    });
+  }
+
+  for(let i=0;i<40;i++) createLotus();
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.font = "30px serif";
+
+    lotuses.forEach(l=>{
+      ctx.fillText("🪷", l.x, l.y);
+      l.y += l.speed;
+
+      if(l.y > canvas.height){
+        l.y = -20;
+        l.x = Math.random()*canvas.width;
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // MOBILE RESIZE FIX
+  window.addEventListener('resize', ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
